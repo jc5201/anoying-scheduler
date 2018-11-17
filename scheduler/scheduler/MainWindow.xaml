@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:scheduler"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Initialized="Grid_Initialized">
-        <Calendar HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+    <Grid>
+        <Calendar x:Name="calendar" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" AutomationProperties.Name="calendar" Initialized="Calendar_Initialized" SelectionMode="MultipleRange" SelectedDatesChanged="calendar_SelectedDatesChanged"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="707,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <TextBox x:Name="temptext" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Margin="233,40,0,0"/>
 
     </Grid>
 </Window>

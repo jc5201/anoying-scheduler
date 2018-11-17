@@ -24,16 +24,42 @@ namespace scheduler
         {
             InitializeComponent();
         }
-
-        private void Grid_Initialized(object sender, EventArgs e)
-        {
-            GoogleCalendarManager.init();
-        }
+    
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             BanSetting bWin = new BanSetting();
             bWin.Show();
+        }
+
+        private void Calendar_Initialized(object sender, EventArgs e)
+        {
+            GoogleCalendarManager.init();
+            Calendar_Select_From_Google();
+        }
+        
+
+        private void Calendar_Select_From_Google()
+        {
+            calendar.SelectedDatesChanged -= calendar_SelectedDatesChanged;
+            calendar.SelectedDates.Clear();
+            foreach (DateTime dt in GoogleCalendarManager.GetDateTimes())
+            {
+                calendar.SelectedDates.Add(dt);
+            }
+            calendar.SelectedDatesChanged += calendar_SelectedDatesChanged;
+        }
+
+        private void calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(calendar.SelectedDates.Count == 1)
+            {
+                if (temptext != null)
+                {
+                    temptext.Text = calendar.SelectedDates.ElementAt(0).Date.ToString();
+                    Calendar_Select_From_Google();
+                }
+            }
         }
     }
 }
