@@ -68,7 +68,8 @@ namespace scheduler
         {
             return events.Items
                 .Where(e => e.Start.DateTime.HasValue)
-                .Where(e => e.Start.DateTime.Value.Day == dt.Day)
+                .Where(e => e.Start.DateTime.Value.Day == dt.Day && e.Start.DateTime.Value.Month == dt.Month 
+                    && e.Start.DateTime.Value.Year == dt.Year)
                 .Select(e => e.Start.DateTime.Value.ToString("HH:mm ") + e.Summary).ToList<string>();
         }
     }
