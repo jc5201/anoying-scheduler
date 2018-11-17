@@ -9,18 +9,22 @@ namespace scheduler
 {
 	class ProcessManager
 	{
-		private Process[] processList;
-
-		public bool checkList(List<string> blackList)
+		public List<string> getProcList()
 		{
-			processList = Process.GetProcesses();
+			IEnumerable<Process> processList = Process.GetProcesses().Where(pr => pr.MainWindowHandle != IntPtr.Zero);
 
 			List<String> pList = new List<String>();
 
 			foreach (Process p in processList)
 			{
-				pList.Add(p.ProcessName.ToString());
+				pList.Add(p.ProcessName.ToString().ToLower());
 			}
+
+			return pList;
+		}
+		public bool checkList(List<string> blackList)
+		{
+			List<String> pList = getProcList();
 
 			foreach (String p in blackList)
 			{
