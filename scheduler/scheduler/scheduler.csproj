@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="GoogleCalendarManager.cs" />
     <Compile Include="NotificationManager.cs" />
+    <Compile Include="ProcessManager.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
