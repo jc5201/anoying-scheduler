@@ -9,7 +9,7 @@ namespace scheduler
 {
 	class ProcessManager
 	{
-		public List<string> getProcList()
+		public List<String> getProcList()
 		{
 			IEnumerable<Process> processList = Process.GetProcesses().Where(pr => pr.MainWindowHandle != IntPtr.Zero);
 
@@ -22,7 +22,7 @@ namespace scheduler
 
 			return pList;
 		}
-		public bool checkList(List<string> blackList)
+		public bool checkList(List<String> blackList)
 		{
 			List<String> pList = getProcList();
 
