@@ -17,7 +17,7 @@ namespace scheduler
 			if (!Directory.Exists(banListDir)) { Directory.CreateDirectory(banListDir); }
 		}
 
-		public List<String> GetBanList()
+		public static List<String> GetBanList()
 		{
 			if (!System.IO.File.Exists(banListFile))
 				return new List<String>();
@@ -47,5 +47,18 @@ namespace scheduler
 				System.IO.File.WriteAllLines(banListFile, old);
 			}
 		}
-}
+
+		public static bool IsBanProcessRunning()
+		{
+			List<String> pList = ProcessManager.GetProcList();
+
+			foreach (String p in GetBanList())
+			{
+				if (pList.Contains(p))
+					return true;
+			}
+
+			return false;
+		}
+	}
 }

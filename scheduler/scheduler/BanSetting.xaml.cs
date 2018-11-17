@@ -20,32 +20,29 @@ namespace scheduler
     /// </summary>
     public partial class BanSetting : Window
     {
-		private ProcessManager PM = new ProcessManager();
-		private BanListManager BM = new BanListManager();
-		
 		public BanSetting()
         {
             InitializeComponent();
-			procList.ItemsSource = PM.getProcList();
-			banList.ItemsSource = BM.GetBanList();
+			procList.ItemsSource = ProcessManager.GetProcList();
+			banList.ItemsSource = BanListManager.GetBanList();
 
         }
 
 		private void banProc_Click(object sender, RoutedEventArgs e)
 		{
 			BM.Add((string)procList.SelectedItem);
-			banList.ItemsSource = BM.GetBanList();
+			banList.ItemsSource = BanListManager.GetBanList();
 		}
 
 		private void unbanProc_Click(object sender, RoutedEventArgs e)
 		{
 			BM.Rm((string)banList.SelectedItem.ToString());
-			banList.ItemsSource = BM.GetBanList();
+			banList.ItemsSource = BanListManager.GetBanList();
 		}
 
 		private void Refresh_Click(object sender, RoutedEventArgs e)
 		{
-			procList.ItemsSource = PM.getProcList();
+			procList.ItemsSource = ProcessManager.GetProcList();
 		}
 	}
 }
