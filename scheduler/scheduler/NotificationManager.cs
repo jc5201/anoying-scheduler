@@ -12,7 +12,7 @@ namespace scheduler
         public void showNotificationWithMsg(string msg)
         {
             PopupNotifier popup = new PopupNotifier();
-            popup.TitleText = "AS";
+            popup.TitleText = "Annoying Scheduler";
             popup.ContentText = msg;
             popup.Popup();
         }
