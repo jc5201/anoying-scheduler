@@ -17,7 +17,7 @@ namespace scheduler
     {
         static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
         static string ApplicationName = "Google Calendar API .NET Quickstart";
-        public static Events events;
+        private static Events events;
 
         public static void init()
         {
@@ -53,6 +53,23 @@ namespace scheduler
 
             // List events.
             events = request.Execute();
+        }
+
+        static public List<DateTime> GetDateTimes()
+        {
+            if (events.Items != null && events.Items.Count > 0)
+                return events.Items
+                    .Where(e => e.Start.DateTime.HasValue)
+                    .Select(e => e.Start.DateTime.Value).ToList();
+            return new List<DateTime>();
+        }
+
+        static public List<string> GetTasksOfDay(DateTime dt)
+        {
+            return events.Items
+                .Where(e => e.Start.DateTime.HasValue)
+                .Where(e => e.Start.DateTime.Value.Day == dt.Day)
+                .Select(e => e.Start.DateTime.Value.ToString("HH:mm ") + e.Summary).ToList<string>();
         }
     }
 }
