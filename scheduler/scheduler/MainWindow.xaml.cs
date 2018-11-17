@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Timers;
 
 namespace scheduler
 {
@@ -23,6 +24,19 @@ namespace scheduler
         public MainWindow()
         {
             InitializeComponent();
+
+            Timer timer = new System.Timers.Timer();
+            timer.Interval = 5 * 1000; 
+            timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
+            timer.Start();
+        }
+
+        static void timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            //if (BanListManager.IsBanProcessRunning() && GoogleCalendarManager.ExistTaskInADay())
+            {
+                new NotificationManager().showNotificationWithMsg("Stop playing game!");
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

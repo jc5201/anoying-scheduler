@@ -72,5 +72,13 @@ namespace scheduler
                     && e.Start.DateTime.Value.Year == dt.Year)
                 .Select(e => e.Start.DateTime.Value.ToString("HH:mm ") + e.Summary).ToList<string>();
         }
+
+        static public bool ExistTaskInADay()
+        {
+            return events.Items
+                .Where(e => e.Start.DateTime.HasValue)
+                .Where(e => (e.Start.DateTime.Value - DateTime.Now).TotalHours < 24)
+                .ToList().Count != 0;
+        }
     }
 }

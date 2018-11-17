@@ -9,7 +9,7 @@ namespace scheduler
 {
     class NotificationManager
     {
-        static void showNotificationWithMsg(string msg)
+        public void showNotificationWithMsg(string msg)
         {
             PopupNotifier popup = new PopupNotifier();
             popup.TitleText = "AS";
