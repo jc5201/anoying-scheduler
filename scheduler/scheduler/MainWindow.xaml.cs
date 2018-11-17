@@ -36,8 +36,10 @@ namespace scheduler
         {
             if (BanListManager.IsBanProcessRunning() && GoogleCalendarManager.ExistTaskInADay())
             {
+                String[] msgs = { "Stop playing Game!", "What are you doing?", "Go Back to your work" };
+                Random rnd = new Random();
                 Dispatcher.BeginInvoke(new Action(delegate {
-                    new NotificationManager().showNotificationWithMsg("Stop playing game!");
+                    new NotificationManager().showNotificationWithMsg(msgs[rnd.Next()%3]);
                     }));
             }
         }
@@ -86,10 +88,6 @@ namespace scheduler
                 taskBox.Items.Add(s);
             }
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            new NotificationManager().showNotificationWithMsg("Button Clicked!");
-        }
+        
     }
 }
