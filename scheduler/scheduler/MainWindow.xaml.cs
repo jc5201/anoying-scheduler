@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
+using System.Reflection;
 
 namespace scheduler
 {
@@ -31,11 +32,13 @@ namespace scheduler
             timer.Start();
         }
 
-        static void timer_Elapsed(object sender, ElapsedEventArgs e)
+        void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            //if (BanListManager.IsBanProcessRunning() && GoogleCalendarManager.ExistTaskInADay())
+            if (BanListManager.IsBanProcessRunning() && GoogleCalendarManager.ExistTaskInADay())
             {
-                new NotificationManager().showNotificationWithMsg("Stop playing game!");
+                Dispatcher.BeginInvoke(new Action(delegate {
+                    new NotificationManager().showNotificationWithMsg("Stop playing game!");
+                    }));
             }
         }
 
@@ -82,6 +85,11 @@ namespace scheduler
             {
                 taskBox.Items.Add(s);
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            new NotificationManager().showNotificationWithMsg("Button Clicked!");
         }
     }
 }
