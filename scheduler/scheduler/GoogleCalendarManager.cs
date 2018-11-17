@@ -63,5 +63,13 @@ namespace scheduler
                     .Select(e => e.Start.DateTime.Value).ToList();
             return new List<DateTime>();
         }
+
+        static public List<string> GetTasksOfDay(DateTime dt)
+        {
+            return events.Items
+                .Where(e => e.Start.DateTime.HasValue)
+                .Where(e => e.Start.DateTime.Value.Day == dt.Day)
+                .Select(e => e.Start.DateTime.Value.ToString("HH:mm ") + e.Summary).ToList<string>();
+        }
     }
 }

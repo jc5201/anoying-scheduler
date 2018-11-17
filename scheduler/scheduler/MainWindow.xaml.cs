@@ -41,24 +41,33 @@ namespace scheduler
 
         private void Calendar_Select_From_Google()
         {
-            calendar.SelectedDatesChanged -= calendar_SelectedDatesChanged;
+            calendar.SelectedDatesChanged -= Calendar_SelectedDatesChanged;
             calendar.SelectedDates.Clear();
             foreach (DateTime dt in GoogleCalendarManager.GetDateTimes())
             {
                 calendar.SelectedDates.Add(dt);
             }
-            calendar.SelectedDatesChanged += calendar_SelectedDatesChanged;
+            calendar.SelectedDatesChanged += Calendar_SelectedDatesChanged;
         }
 
-        private void calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             if(calendar.SelectedDates.Count == 1)
             {
-                if (temptext != null)
+                if (taskBox != null)
                 {
-                    temptext.Text = calendar.SelectedDates.ElementAt(0).Date.ToString();
+                    TaskBox_update_at(calendar.SelectedDates.ElementAt(0));
                     Calendar_Select_From_Google();
                 }
+            }
+        }
+
+        private void TaskBox_update_at(DateTime dt)
+        {
+            taskBox.Items.Clear();
+            foreach (string s in GoogleCalendarManager.GetTasksOfDay(dt))
+            {
+                taskBox.Items.Add(s);
             }
         }
     }
