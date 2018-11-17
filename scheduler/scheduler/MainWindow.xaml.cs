@@ -36,10 +36,10 @@ namespace scheduler
         {
             if (BanListManager.IsBanProcessRunning() && GoogleCalendarManager.ExistTaskInADay())
             {
-                String[] msgs = { "Stop playing Game!", "What are you doing?", "Go Back to your work" };
+                String[] msgs = { "Stop playing Game!", "What are you doing?", "Go Back to your work!", "Did you finished your task?" };
                 Random rnd = new Random();
                 Dispatcher.BeginInvoke(new Action(delegate {
-                    new NotificationManager().showNotificationWithMsg(msgs[rnd.Next()%3]);
+                    new NotificationManager().showNotificationWithMsg(msgs[rnd.Next() % (msgs.Length)]);
                     }));
             }
         }

@@ -35,7 +35,7 @@ namespace scheduler
             var options = new ToastNotifications.Core.MessageOptions
             {
                 FontSize = 20, // set notification font size
-                ShowCloseButton = false, // set the option to show or hide notification close button
+                ShowCloseButton = true, // set the option to show or hide notification close button
                 Tag = "Any object or value which might matter in callbacks",
             };
             notifier.ShowError(msg,options);
