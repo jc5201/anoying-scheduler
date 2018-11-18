@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:scheduler"
         mc:Ignorable="d"
-        Title="AnnoyingScheduler" Height="450" Width="800">
+        Title="AnnoyingScheduler" Height="450" Width="800" Closing="Window_Closing">
     <Grid>
         <Button Content="Setting" HorizontalAlignment="Left" Margin="22,37,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <ListBox x:Name="taskBox" HorizontalAlignment="Left" Height="302" Margin="381,82,0,0" VerticalAlignment="Top" Width="367" Padding="20" FontSize="20"/>

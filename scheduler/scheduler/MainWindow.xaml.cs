@@ -22,6 +22,8 @@ namespace scheduler
     /// </summary>
     public partial class MainWindow : Window
     {
+		public System.Windows.Forms.NotifyIcon notify;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -30,7 +32,24 @@ namespace scheduler
             timer.Interval = 5 * 1000; 
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             timer.Start();
-        }
+			trayInit();
+		}
+
+		void trayInit()
+		{
+			notify = new System.Windows.Forms.NotifyIcon();
+			notify.Icon = Properties.Resources.ico;
+			notify.Text = "schedular";
+			notify.DoubleClick += Notify_DoubleClick;
+			notify.ContextMenu = new System.Windows.Forms.ContextMenu();
+
+			System.Windows.Forms.MenuItem menuItem = new System.Windows.Forms.MenuItem();
+			menuItem.Index = 0;
+			menuItem.Text = "Exit";
+			menuItem.Click += SystemTrayExitHander;
+
+			notify.ContextMenu.MenuItems.Add(menuItem);
+		}
 
         void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -88,6 +107,27 @@ namespace scheduler
                 taskBox.Items.Add(s);
             }
         }
-        
-    }
+
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			
+			notify.Visible = true;
+			this.Visibility = Visibility.Collapsed;
+			
+			e.Cancel = true;
+		}
+
+		private void Notify_DoubleClick(object sender, EventArgs e)
+		{
+			notify.Visible = false;
+			this.Visibility = Visibility.Visible;
+		}
+
+		private void SystemTrayExitHander(object sender, EventArgs e)
+		{
+			this.Closing -= Window_Closing;
+			this.Close();
+		}
+
+	}
 }
