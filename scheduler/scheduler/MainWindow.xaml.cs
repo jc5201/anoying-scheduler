@@ -34,7 +34,7 @@ namespace scheduler
 
         void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            if (BanListManager.IsBanProcessRunning() && GoogleCalendarManager.ExistTaskInADay())
+            if (GoogleCalendarManager.ExistTaskInADay() && BanListManager.IsBanProcessRunning())
             {
                 String[] msgs = { "Stop playing Game!", "What are you doing?", "Go Back to your work!", "Did you finished your task?" };
                 Random rnd = new Random();
